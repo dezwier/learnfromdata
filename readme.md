@@ -19,11 +19,9 @@
 
 ## Commands
 
-Dependencies
-
 * `conda create --name <env_name> python=3.9.18`
 * `conda activate <env_name>`
-* `pip install -r requirements.txt` in a python 3.7 environment
+* `pip install git+https://github.com/dezwier/learnfromdata`
 
 ## UML of LFD module
 <pre style="line-height: 1.1; letter-spacing: -0.2px; font-size: small;">

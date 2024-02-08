@@ -2,7 +2,6 @@ import pandas as pd
 import os
 import logging
 import json
-from memory_profiler import profile
 import shutil
 from tabulate import tabulate
 from datetime import datetime
@@ -198,7 +197,6 @@ class Pipeline:
             self.stack_model.apply(Data(scores, name='scores'), store=True, cutoff_params=cutoff_params)
             if evaluate: self.stack_model.evaluate(self.stack_model.predictions)
 
-    @profile
     def learn(self, params, data=None, train=None, cutoff_params=None, evaluate=True, explain=True):
         '''
         Learns a modelling pipeline. From data setting, to learning transformers, to learning and 

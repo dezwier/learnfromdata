@@ -21,7 +21,6 @@ setup(
         "jupyter==1.0.0",
         "tabulate==0.9.0",
         "openpyxl==3.1.2",
-        "memory_profiler==0.61.0",
         "nbformat==5.9.0",
         "xlsxwriter==3.1.2",
         "lxml==4.9.2",

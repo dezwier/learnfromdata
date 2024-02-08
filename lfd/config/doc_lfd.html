@@ -1,0 +1,161 @@
+<div>
+    <div class="row">
+        <div class="col-xl-8 col-10">
+            <h3>Summary</h3>
+            <p>This package contains tools to build modelling pipelines.</p>
+
+            <p>These pipelines are composed of a number of data transformers and one or more 
+            (un)supervised models. They can be configured, evaluated, explained, visualized, saved,
+            and iterated with various parameters. Any use of the package is reproducible.</p>
+
+            <p>The package can be seen as a thin, object oriented layer on top of the Numpy stack (including packages as 
+            Numpy, Pandas and Sklearn). It follows the fit-transform paradigm of Sklearn meaning that pipelines 
+            (and thus its transformers and models) are always first learned and later on applied.</p>
+        </div>
+    </div>
+
+    <br></br><h3>Get Started</h3>
+    <p>These are little code sippets to get started. For more details on atributes, methods, inputs and outputs, refer to the respective class documentation.</p>
+    <div class="row">
+        <div class="col-6">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      Learn a pipeline
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <pre><code class="python">import lfd
+data = lfd.Data('path/to/data.csv')
+params = lfd.get_params(target='target_variable', mode='binaryclass')
+pipe = lfd.Pipeline()
+pipe.learn(params, data)
+pipe.save('path/to/experiment', as_pickle=True)</code></pre>    
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1" aria-expanded="false" aria-controls="flush-collapseOne1">
+                        Apply a pipeline
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne1" class="accordion-collapse collapse" aria-labelledby="flush-headingOne1" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <pre><code class="python">import lfd
+data = lfd.Data('path/to/new_data.csv')
+pipe = lfd.Pipeline()
+pipe.load('path/to/experiment.pkl')
+pipe.apply(data)</code></pre>    
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne2" aria-expanded="false" aria-controls="flush-collapseOne2">
+                        Visualize a pipeline
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne2" class="accordion-collapse collapse" aria-labelledby="flush-headingOne2" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <pre><code class="python">import lfd
+pipe = ... # Load or learn pipeline
+plotter = lfd.ModelPlotter(theme='dark', colors='belfius')
+
+# Run visualization dashboard
+plotter.run_app('path/to/experiments', host='10.226.128.91', port=9065)
+
+# Plot visualizations in a notebook
+model = pipe.models['Xgboost']
+plotter.confusion_heatmaps(model.confusion)
+plotter.plot_bar_chart(model.feature_imp.head(20))
+plotter.lift_curve(model.predictions.df, bins=20)</code></pre>    
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne3" aria-expanded="false" aria-controls="flush-collapseOne3">
+                        Bootstrap a pipeline
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne3" class="accordion-collapse collapse" aria-labelledby="flush-headingOne3" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <pre><code class="python">import lfd
+boot = lfd.Bootstrap('path/to/experiments')
+boot.learn_pipelines(data, all_params, data_iters=20, model_iters=20)
+meta = boot.get_meta(model='Xgboost', dataset='Test', metrics='accuracy')</code></pre>    
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                      Configure a pipeline
+                    </button>
+                  </h2>
+                  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <pre><code class="python">params = dict(
+    set_aside = ['variables', 'to', 'exclude'],
+    data = dict(
+        add_noise = dict(seed=0),
+        test_split = dict(test_size=0.2, stratify_col=None, seed=0),
+    ),
+    transform = dict(
+        uniselector = dict(min_occ=0.01, max_occ=0.99),
+        imputer = dict(default_cat='MISSING', default_cont='median'),
+        encoder = dict(min_occ=0.01, method='onehot'),
+        biselector = dict(threshold=0.8, target='target_variable'),
+    ),
+    model = dict(
+        target='target_variable', mode='binaryclass', seed_train=0,
+        base0 = dict(algorithm='xgboost', name='Xgboost', hyper_params=dict(
+            n_estimators=100, max_depth=6
+        )),
+        calibrate = dict(algorithm='regression', hyper_params=dict()),
+    )
+)</code></pre>                            
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+    <br></br><br></br><h3>UML Class Diagram</h3>
+    <br></br>
+    <pre class="uml">
+    ┌─────────────┐           ┌─────────────────┐           ┌───────────────┐       ┌──────────────┐
+    │ Pipeline    ├───────────┤ Bootstrap       │           │ Plotter       ├───────┤ ModelPlotter │
+    ├─────────────┤           ├─────────────────┤           ├───────────────┤       ├──────────────┤
+    │ learn       │           │ learn_pipelines │           │ line_chart    │       │ run_app      │
+    │ apply       │           │ get_meta        │           │ boxplots      │       │ liftcurve    │
+    │ save        │           └─────────────────┘           │ histogram     │       │ confusion    │
+    │ load        ├─────┐                                   │ ...           │       │ ...          │
+    └─────┬───────┘     │                                   └───────────────┘       └──────────────┘
+          │             │     ┌─────────────┐
+          │             ├─────┤ Transformer ├──────────┬───────────────┬────────────┬─────────────┬───────────────┬──────────────┬─────────────────┐
+    ┌─────┴───────┐     │     ├─────────────┤          │               │            │             │               │              │                 │
+    │ Data        │     │     │ learn       │   ┌──────┴──────┐   ┌────┴───┐   ┌────┴────┐   ┌────┴────┐   ┌──────┴─────┐   ┌────┴─────┐   ┌───────┴──────┐
+    ├─────────────┤     │     │ apply       │   │ UniSelector │   │ Binner │   │ Imputer │   │ Encoder │   │ Biselector │   │ Expander │   │ Standardizer │
+    │ merge       │     │     │ save        │   ├─────────────┤   ├────────┤   ├─────────┤   ├─────────┤   ├────────────┤   ├──────────┤   ├──────────────┤
+    │ split       │     │     │ load        │   │ learn       │   │ learn  │   │ learn   │   │ learn   │   │ learn      │   │ learn    │   │ learn        │
+    │ balance     │     │     └─────────────┘   │ apply       │   │ apply  │   │ apply   │   │ apply   │   │ apply      │   │ apply    │   │ apply        │
+    │ filter      │     │                       └─────────────┘   └────────┘   └─────────┘   └─────────┘   └────────────┘   └──────────┘   └──────────────┘
+    │ select      │     │     ┌─────────────┐
+    │ sample      │     └─────┤ Model       ├──────────┬──────────────┬──────────────┬─────────────────┬────────────────┬───────────────┐
+    │ concat      │           ├─────────────┤          │              │              │                 │                │               │
+    │ generate    │           │ learn       │   ┌──────┴─────┐   ┌────┴────┐   ┌─────┴─────┐   ┌───────┴──────┐   ┌─────┴────┐   ┌──────┴──────┐
+    │ add_noise   │           │ apply       │   │ Regression │   │ Xgboost │   │ NeuralNet │   │ DecisionTree │   │ Isotonic │   │ UniSelector │
+    │ save        │           │ evaluate    │   ├────────────┤   ├─────────┤   ├───────────┤   ├──────────────┤   ├──────────┤   ├─────────────┤
+    │ load        │           │ explain     │   │ learn      │   │ learn   │   │ learn     │   │ learn        │   │ learn    │   │ learn       │
+    └─────────────┘           │ save        │   │ apply      │   │ apply   │   │ apply     │   │ apply        │   │ apply    │   │ apply       │
+                              │ load        │   └────────────┘   └─────────┘   └───────────┘   └──────────────┘   └──────────┘   └─────────────┘
+                              └─────────────┘
+    </pre>
+</div>

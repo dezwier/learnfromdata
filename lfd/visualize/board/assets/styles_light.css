@@ -1,0 +1,55 @@
+
+body, pre, .table {
+    color: #555;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.card-header {
+    background-color:#fff;
+}
+
+footer > div{
+    background-color: #ccc !important;
+}
+
+.plain, .nav {
+    background-color: #f5f5f5
+}
+
+.nav-item {
+    padding: 0px 10px;
+}
+
+.nav-item h5 {
+    color: #ddd;
+}
+
+footer p {
+    color:rgb(126, 126, 126);
+}
+
+.subheader {
+    /* background: url(/assets/banners/app.jpg) repeat center center;     */
+    background-color: #ccc;    
+}
+
+.subheader h3 {
+    color: #555;
+}
+
+
+/* Typography
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+h1, h2, h3, h4, h5, h6 {
+    color: #555;
+}
+
+/* Links
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+li h5 {
+    color: #eee;
+}

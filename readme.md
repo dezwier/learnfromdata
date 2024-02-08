@@ -3,23 +3,18 @@
 ## Contents
 
 ~~~~
-  ├── learnfromdata             # Learnfromdata library       
-  │   ├── lfd                        # Learnfromdata source code
-  │   │   ├── config                    # Configuration tools
-  │   │   ├── data                      # Data class
-  │   │   ├── transform                 # Transform classes
-  │   │   ├── model                     # Model classes
-  │   │   ├── pipeline                  # Pipeline class
-  │   │   └── visualize                 # Visualizer class
-  │   ├── tests                     # Unittests for source code
-  │   ├── requirements.txt          # Dependencies to be installed with pip
-  │   └── setup.py                  # Configuration file for package build
-  ├── datasets                  # Toy datasets used in notebooks
-  ├── dash                      # Minimum working dash example for EDA
-  ├── experiments               # Empty storage folder for LFD output
+  learnfromdata             # Learnfromdata library       
+  ├── lfd                        # Learnfromdata source code
+  │   ├── config                    # Configuration tools
+  │   ├── data                      # Data class
+  │   ├── transform                 # Transform classes
+  │   ├── model                     # Model classes
+  │   ├── pipeline                  # Pipeline class
+  │   ├── utils                     # Useful functions
+  │   └── visualize                 # Visualizer class
   ├── notebooks                 # Examplary notebooks using LFD
-  ├── .gitignore
-  └── readme.md
+  ├── tests                     # Unittests for source code
+  └── setup.py                  # Configuration file for package build
 ~~~~
 
 ## Commands
